@@ -1,97 +1,343 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MiPuebloConecta</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MiPuebloConecta — Directorio local sencillo</title>
+  <meta name="description" content="MiPuebloConecta: directorio local offline pensado para personas mayores. Encuentra comercios y servicios de tu barrio de forma simple." />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
+    /* Pequeñas mejoras de estilo */
+    :root {
+      --accent: #2563eb; /* azul */
+      --muted: #6b7280;
     }
-    h1, h2, h3 {
-      font-family: 'Roboto Slab', serif;
+    .hero-bg {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    /* Overlay para legibilidad */
+    .hero-overlay {
+      background: linear-gradient(180deg, rgba(8,8,10,0.35) 0%, rgba(8,8,10,0.55) 100%);
+    }
+    /* boton CTA grande para mayores */
+    .cta-btn {
+      border-radius: .75rem;
+      padding: .8rem 1.25rem;
+      font-weight: 700;
     }
   </style>
 </head>
-<body class="bg-gray-900 text-gray-200">
+<body class="antialiased text-gray-800">
 
-  <!-- Hero -->
-  <section class="relative bg-gray-900 text-white">
-    <div class="max-w-7xl mx-auto px-6 py-24 text-center">
-      <h1 class="text-5xl font-bold mb-6">MiPuebloConecta</h1>
-      <p class="text-xl mb-8">La app que conecta a personas mayores y vecinos con todos los comercios y servicios de su localidad, ¡incluso sin internet!</p>
-      <a href="#contacto" class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg">Quiero más información</a>
+  <!-- NAV -->
+  <header class="bg-white shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center gap-4">
+          <div class="rounded-full bg-blue-600 text-white w-12 h-12 flex items-center justify-center font-bold text-lg">MP</div>
+          <div>
+            <a href="#" class="text-lg font-semibold text-gray-900">MiPuebloConecta</a>
+            <div class="text-sm text-gray-500">Tu guía local, simple y siempre disponible</div>
+          </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-6 text-sm">
+          <a href="#como-funciona" class="text-gray-600 hover:text-gray-900">Cómo funciona</a>
+          <a href="#beneficios" class="text-gray-600 hover:text-gray-900">Beneficios</a>
+          <a href="#contacto" class="text-gray-600 hover:text-gray-900">Contacto</a>
+          <a href="#demo" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-semibold hover:bg-blue-700">Ver demo</a>
+        </nav>
+
+        <!-- Mobile menu button -->
+        <div class="md:hidden">
+          <button id="btnMenu" aria-label="Abrir menú" class="p-2 rounded-md hover:bg-gray-100">
+            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
-  </section>
 
-  <!-- Cómo funciona -->
-  <section class="bg-gray-800 py-16 px-6">
-    <div class="max-w-5xl mx-auto text-center">
-      <h2 class="text-3xl font-bold mb-8">¿Cómo funciona?</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-gray-700 p-6 rounded-xl shadow-md">
-          <h3 class="text-xl font-semibold mb-4">1. Descarga fácil</h3>
-          <p>Instala la app PWA desde el navegador, sin necesidad de tienda de aplicaciones.</p>
-        </div>
-        <div class="bg-gray-700 p-6 rounded-xl shadow-md">
-          <h3 class="text-xl font-semibold mb-4">2. Información al alcance</h3>
-          <p>Accede a horarios, teléfonos y direcciones de comercios y servicios locales.</p>
-        </div>
-        <div class="bg-gray-700 p-6 rounded-xl shadow-md">
-          <h3 class="text-xl font-semibold mb-4">3. Funciona offline</h3>
-          <p>Consulta la información incluso sin conexión, gracias al almacenamiento en caché.</p>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t">
+      <div class="px-4 py-4 space-y-2">
+        <a href="#como-funciona" class="block text-gray-700">Cómo funciona</a>
+        <a href="#beneficios" class="block text-gray-700">Beneficios</a>
+        <a href="#contacto" class="block text-gray-700">Contacto</a>
+        <a href="#demo" class="block bg-blue-600 text-white text-center py-2 rounded-md">Ver demo</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero" class="hero-bg" style="background-image: url('https://img.freepik.com/foto-gratis/mesa-oficina-b…ebdfb64ff14c2d99351b916613c602e88bbf38602b&w=1480');">
+    <div class="hero-overlay">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="text-white">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight">MiPuebloConecta</h1>
+            <p class="mt-4 text-lg sm:text-xl text-blue-100 max-w-xl">
+              Encuentra los comercios y servicios de tu barrio de forma <strong>fácil, rápida y sin depender de internet</strong>. Diseñado para personas mayores y vecinos que prefieren lo simple.
+            </p>
+
+            <div class="mt-8 flex gap-4">
+              <a href="#contacto" class="cta-btn bg-white text-blue-600 shadow-md hover:shadow-lg">Contactar y probar</a>
+              <a href="#demo" class="cta-btn bg-transparent border border-white text-white hover:bg-white/10">Ver demo</a>
+            </div>
+
+            <div class="mt-6 text-sm text-white/80 max-w-lg">
+              <strong>¡Prototipo listo para pilotos locales!</strong> QR físicos, modo offline y diseño pensado para ojos y manos mayores.
+            </div>
+          </div>
+
+          <div class="relative">
+            <!-- Decorative image stack using provided URLs -->
+            <div class="grid grid-cols-1 gap-4">
+              <img src="https://img.freepik.com/foto-gratis/oficina-arquit…7a4ec5158e8974b159270ea2ed0fe5bdf01eee21f0&w=1480" alt="Oficina 1" class="rounded-xl shadow-lg w-full object-cover h-64">
+              <img src="https://img.freepik.com/foto-gratis/oficina-arquit…7a4ec5158e8974b159270ea2ed0fe5bdf01eee21f0&w=1480" alt="Oficina 2" class="rounded-xl shadow-lg w-full object-cover h-64">
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Beneficios -->
-  <section class="bg-gray-900 py-16 px-6">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-12">Beneficios principales</h2>
-      <div class="grid md:grid-cols-2 gap-10">
-        <div class="bg-gray-800 p-8 rounded-xl shadow-lg">
-          <h3 class="text-2xl font-semibold mb-4">Para personas mayores</h3>
-          <ul class="list-disc list-inside space-y-2">
-            <li>Acceso sencillo y rápido sin complicaciones tecnológicas.</li>
-            <li>Funcional incluso en zonas con mala cobertura.</li>
-            <li>Diseño adaptado con tipografía clara y botones grandes.</li>
-          </ul>
+  <!-- BENEFICIOS -->
+  <section id="beneficios" class="py-12 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900">Por qué MiPuebloConecta</h2>
+      <p class="mt-2 text-gray-600 max-w-2xl">Diseñado para cubrir las necesidades reales de personas mayores y ciudadanos con poca experiencia digital.</p>
+
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-6 border rounded-lg">
+          <h3 class="font-semibold text-lg">Funciona sin internet</h3>
+          <p class="mt-2 text-gray-600 text-sm">La PWA guarda la información esencial en tu teléfono para consultarla aunque no tengas cobertura.</p>
         </div>
-        <div class="bg-gray-800 p-8 rounded-xl shadow-lg">
-          <h3 class="text-2xl font-semibold mb-4">Para comercios locales</h3>
-          <ul class="list-disc list-inside space-y-2">
-            <li>Mayor visibilidad entre los vecinos.</li>
-            <li>Promoción gratuita de servicios básicos.</li>
-            <li>Conexión directa con clientes habituales.</li>
-          </ul>
+        <div class="p-6 border rounded-lg">
+          <h3 class="font-semibold text-lg">Interfaz ampliada</h3>
+          <p class="mt-2 text-gray-600 text-sm">Botones grandes, textos legibles y flujos sencillos para evitar confusiones.</p>
+        </div>
+        <div class="p-6 border rounded-lg">
+          <h3 class="font-semibold text-lg">Acciones directas</h3>
+          <p class="mt-2 text-gray-600 text-sm">Llama con un toque, consulta horarios y direcciones sin menús complejos.</p>
+        </div>
+        <div class="p-6 border rounded-lg">
+          <h3 class="font-semibold text-lg">Apoyo local</h3>
+          <p class="mt-2 text-gray-600 text-sm">Colaboración con ayuntamientos y comercios para mantener la información actualizada.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contacto -->
-  <section id="contacto" class="bg-gray-800 py-20 px-6">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-center mb-8">Contáctanos</h2>
-      <form action="https://formspree.io/f/{tu-endpoint}" method="POST" class="space-y-6">
-        <div class="grid md:grid-cols-2 gap-6">
-          <input type="text" name="name" placeholder="Nombre completo" required class="w-full p-4 rounded-md bg-gray-700 text-white">
-          <input type="email" name="email" placeholder="Correo electrónico" required class="w-full p-4 rounded-md bg-gray-700 text-white">
+  <!-- COMO FUNCIONA -->
+  <section id="como-funciona" class="py-12 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900">Cómo funciona (MVP)</h2>
+      <div class="mt-6 grid md:grid-cols-3 gap-6">
+        <div class="p-6 bg-white rounded-lg shadow-sm">
+          <div class="text-blue-600 font-bold text-xl">1</div>
+          <h3 class="font-semibold text-lg mt-2">Datos locales</h3>
+          <p class="mt-2 text-gray-600 text-sm">Recopilamos la lista de comercios y servicios (teléfono, horario, dirección) en un archivo sencillo.</p>
         </div>
-        <textarea name="message" rows="5" placeholder="Escribe tu mensaje..." required class="w-full p-4 rounded-md bg-gray-700 text-white"></textarea>
-        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-md font-semibold">Enviar mensaje</button>
-      </form>
+        <div class="p-6 bg-white rounded-lg shadow-sm">
+          <div class="text-blue-600 font-bold text-xl">2</div>
+          <h3 class="font-semibold text-lg mt-2">Publicación PWA</h3>
+          <p class="mt-2 text-gray-600 text-sm">La PWA carga y guarda los datos en el dispositivo: accesible desde QR o enlace corto.</p>
+        </div>
+        <div class="p-6 bg-white rounded-lg shadow-sm">
+          <div class="text-blue-600 font-bold text-xl">3</div>
+          <h3 class="font-semibold text-lg mt-2">Uso y soporte</h3>
+          <p class="mt-2 text-gray-600 text-sm">Los usuarios acceden, llaman o guardan favoritos; un servicio local (centro, ayuntamiento) puede ofrecer apoyo presencial.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-gray-900 py-8 text-center text-gray-400 text-sm">
-    <p>&copy; 2025 MiPuebloConecta. Todos los derechos reservados.</p>
-    <p>Contacto: frankyholly49@gmail.com</p>
+  <!-- DEMO / KAROUSEL -->
+  <section id="demo" class="py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900">Vista previa</h2>
+      <p class="mt-2 text-gray-600">Mockups y ejemplos rápidos de la interfaz pensada para mayores.</p>
+
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+          <img src="https://img.freepik.com/foto-gratis/mesa-oficina-b…ebdfb64ff14c2d99351b916613c602e88bbf38602b&w=1480" alt="Mockup 1" class="w-full h-56 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold">Pantalla principal</h3>
+            <p class="text-sm text-gray-600 mt-2">Categorías claras y búsqueda con texto grande.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+          <img src="https://img.freepik.com/foto-gratis/oficina-arquit…7a4ec5158e8974b159270ea2ed0fe5bdf01eee21f0&w=1480" alt="Mockup 2" class="w-full h-56 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold">Ficha de comercio</h3>
+            <p class="text-sm text-gray-600 mt-2">Botones directos: llamar / cómo llegar / horario.</p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+          <img src="https://img.freepik.com/foto-gratis/oficina-arquit…7a4ec5158e8974b159270ea2ed0fe5bdf01eee21f0&w=1480" alt="Mockup 3" class="w-full h-56 object-cover">
+          <div class="p-4">
+            <h3 class="font-semibold">Modo offline</h3>
+            <p class="text-sm text-gray-600 mt-2">Datos disponibles sin cobertura, con mensajes claros.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FORM -->
+  <section id="contacto" class="py-12 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl font-bold text-gray-900">Contacta / Solicita piloto</h2>
+      <p class="mt-2 text-gray-600">Déjanos tus datos y te contactamos para organizar un piloto en tu localidad.</p>
+
+      <div class="mt-6 bg-gray-50 p-6 rounded-lg shadow-inner">
+        <form id="contactForm" class="space-y-4" novalidate>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Nombre</label>
+              <input id="name" name="name" type="text" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3" placeholder="Ej. María Pérez" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Teléfono</label>
+              <input id="phone" name="phone" type="tel" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3" placeholder="Ej. 600 123 456" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+            <input id="email" name="email" type="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3" placeholder="frankyholly49@gmail.com" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Localidad / Comentario</label>
+            <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 p-3" placeholder="Dinos en qué municipio quieres probar MiPuebloConecta..."></textarea>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <input id="consent" name="consent" type="checkbox" class="mt-1" required />
+            <label for="consent" class="text-sm text-gray-700">Acepto que me contacten sobre el piloto. Mis datos se usarán solo para este fin.</label>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <button id="submitBtn" type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700">Enviar solicitud</button>
+            <div id="formStatus" class="text-sm text-gray-600"></div>
+          </div>
+
+          <p class="text-xs text-gray-500 mt-2">Contacto directo: <a href="mailto:frankyholly49@gmail.com" class="text-blue-600 underline">frankyholly49@gmail.com</a></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-white py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between gap-6">
+      <div>
+        <div class="font-bold text-lg">MiPuebloConecta</div>
+        <div class="text-sm text-gray-300 mt-2">Directorio local offline pensado para personas mayores.</div>
+      </div>
+
+      <div class="text-sm text-gray-300">
+        <div>Contacto: <a href="mailto:frankyholly49@gmail.com" class="underline">frankyholly49@gmail.com</a></div>
+        <div class="mt-2">© <span id="year"></span> MiPuebloConecta</div>
+      </div>
+    </div>
   </footer>
 
+  <!-- SCRIPTS -->
+  <script>
+    // Poner aquí el endpoint real de tu backend si lo tienes.
+    // Ejemplo: const FORM_ENDPOINT = "https://mi-servicio.com/api/contact";
+    // Si lo dejas vacío, el formulario usará "mailto" como fallback.
+    const FORM_ENDPOINT = ""; // <-- REEMPLAZA con tu endpoint si lo tienes
+
+    // DOM
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const mobileBtn = document.getElementById('btnMenu');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Form handling
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = '';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      const data = {
+        name: document.getElementById('name').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        message: document.getElementById('message').value.trim(),
+        consent: document.getElementById('consent').checked,
+        timestamp: new Date().toISOString()
+      };
+
+      // Validación básica
+      if (!data.name || !data.email || !data.consent) {
+        status.textContent = 'Por favor rellena nombre, email y acepta el consentimiento.';
+        status.style.color = 'crimson';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar solicitud';
+        return;
+      }
+
+      try {
+        if (FORM_ENDPOINT && FORM_ENDPOINT.length > 5) {
+          // Intentar enviar al endpoint por POST
+          const resp = await fetch(FORM_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+
+          if (!resp.ok) throw new Error('Error en el envío');
+
+          status.textContent = 'Solicitud enviada. Te contactaremos pronto.';
+          status.style.color = 'green';
+          form.reset();
+        } else {
+          // Fallback: abrir mail client con mailto (para uso inmediato)
+          const subject = encodeURIComponent('Solicitud piloto MiPuebloConecta');
+          const body = encodeURIComponent(
+            `Nombre: ${data.name}\nTeléfono: ${data.phone}\nEmail: ${data.email}\nLocalidad / Comentario: ${data.message}\n\nEnviado desde MiPuebloConecta (fallback mailto)`
+          );
+          window.location.href = `mailto:frankyholly49@gmail.com?subject=${subject}&body=${body}`;
+          status.textContent = 'Se ha abierto tu cliente de correo para enviar la solicitud.';
+          status.style.color = 'green';
+        }
+      } catch (err) {
+        console.error(err);
+        status.textContent = 'Error enviando la solicitud. Inténtalo de nuevo o contacta por email.';
+        status.style.color = 'crimson';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar solicitud';
+      }
+    });
+
+    // Mejora de accesibilidad: focus visible para keyboard users
+    (function() {
+      function handleFirstTab(e) {
+        if (e.key === 'Tab') {
+          document.body.classList.add('user-is-tabbing');
+          window.removeEventListener('keydown', handleFirstTab);
+        }
+      }
+      window.addEventListener('keydown', handleFirstTab);
+    })();
+
+  </script>
 </body>
 </html>
